@@ -39,7 +39,7 @@ do
 	elif (( chance == 1 ))
 	then
 		#no play
-      if [[ $option -eq 1 ]]
+		if [[ $option -eq 1 ]]
       then
          position2=$position2
       #ladder
@@ -50,7 +50,7 @@ do
       elif [[ $option -eq 3 ]]
       then
          position2=$(( $position2-$rollDice ))
-      chance=0
+      	chance=0
 		fi
 	fi
 done
