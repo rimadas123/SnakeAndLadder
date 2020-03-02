@@ -50,7 +50,7 @@ do
       elif [[ $option -eq 3 ]]
       then
          position2=$(( $position2-$rollDice ))
-      	chance=0
+      chance=0
 		fi
 	fi
 done
