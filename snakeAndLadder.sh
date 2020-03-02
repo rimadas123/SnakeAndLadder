@@ -40,17 +40,17 @@ do
 	then
 		#no play
 		if [[ $option -eq 1 ]]
-      then
-         position2=$position2
-      #ladder
-      elif [[ $option -eq 2 ]]
-      then
-         position2=$(( $position2+$rollDice ))
-      #snake
-      elif [[ $option -eq 3 ]]
-      then
-         position2=$(( $position2-$rollDice ))
-      chance=0
+      		then
+         		position2=$position2
+      		#ladder
+      		elif [[ $option -eq 2 ]]
+      		then
+         		position2=$(( $position2+$rollDice ))
+      		#snake
+      		elif [[ $option -eq 3 ]]
+      		then
+         		position2=$(( $position2-$rollDice ))
+      		chance=0
 		fi
 	fi
 done
