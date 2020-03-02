@@ -6,39 +6,62 @@ echo "Welcome to Snake And Ladder Game"
 GOAL=100
 
 #variables
-player=1
-position=0
+chance=0
+position1=0
+position2=0
 count=0
 
 #for generating dice roll
-calRandom=$(( RANDOM%6 + 1 ))
-echo $calRandom
+rollDice=$(( RANDOM%6 + 1 ))
 
 #checks if the position reached till 100
-while (( position <= $GOAL ))
+while (( position1 <= $GOAL && position2 <= $GOAL ))
 do
 	(( count++ ))
-	#for checking the options like no play, snake or ladder
 	option=$(( RANDOM%3 + 1 ))
+	#for checking the options like no play, snake or ladder
+	if (( chance == 0 ))
+	then
 		#no play
 		if [[ $option -eq 1 ]]
 		then
-			position=$position
-			echo "Current position is "$position
+			position1=$position1
 		#ladder
 		elif [[ $option -eq 2 ]]
 		then
-			echo "random num->" $calRandom
-			position=$(( $position+$calRandom ))
-			echo "Current position is "$position
+			position1=$(( $position1+$rollDice ))
 		#snake
 		elif [[ $option -eq 3 ]]
 		then
-			position=$(( $position-$calRandom ))
-			echo "Current position is "$position
-		else
-		echo "Wrong input"
+			position1=$(( $position1-$rollDice ))
+		chance=1
 		fi
+	elif (( chance == 1 ))
+	then
+		#no play
+      if [[ $option -eq 1 ]]
+      then
+         position2=$position2
+      #ladder
+      elif [[ $option -eq 2 ]]
+      then
+         position2=$(( $position2+$rollDice ))
+      #snake
+      elif [[ $option -eq 3 ]]
+      then
+         position2=$(( $position2-$rollDice ))
+      chance=0
+		fi
+	fi
 done
-echo "Player has reached the winning goal: " $position
-echo "Number of times the dice was played: " $count
+
+if [[ $position1 -eq 100 ]]
+then
+	echo "Player 1 has won the game"
+elif [[ $position2 -eq 100 ]]
+then
+	echo "Player 2 has won the game"
+else
+	echo "Its a tie"
+fi
+
