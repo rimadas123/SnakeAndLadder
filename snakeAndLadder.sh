@@ -44,22 +44,22 @@ do
 	then
 		#no play
 		if [[ $option -eq 1 ]]
-      then
-         position2=$position2
-      #ladder
-      elif [[ $option -eq 2 ]]
-      then
-         position2=$(( $position2+$rollDice ))
-      #snake
-      elif [[ $option -eq 3 ]]
-      then
-      	position2=$(( $position2-$rollDice ))
+		then
+			position2=$position2
+		#ladder
+		elif [[ $option -eq 2 ]]
+		then
+			position2=$(( $position2+$rollDice ))
+		#snake
+		elif [[ $option -eq 3 ]]
+		then
+			position2=$(( $position2-$rollDice ))
 			if [[ $position2 -lt 0 ]]
 			then
 				position2=0
 			fi
 		count=$(( $count+1 ))
-      chance=0
+		chance=0
 		fi
 	fi
 done
