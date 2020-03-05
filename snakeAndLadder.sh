@@ -14,6 +14,33 @@ count=0
 #for generating dice roll
 rollDice=$(( RANDOM%6 + 1 ))
 
+function playerPositionChange()
+{
+	local optionValue=$1
+	local rollDiceValue=$2
+	local position=$3
+
+		#no play
+		if [[ $optionValue -eq 1 ]]
+		then
+			position=$position
+		#ladder
+		elif [[ $optionValue -eq 2 ]]
+		then
+			position=$(( $position+$rollDiceValue ))
+		#snake
+		elif [[ $optionValue -eq 3 ]]
+		then
+			position=$(( $position-$rollDiceValue ))
+			if [[ position -lt 0 ]]
+			then
+				position=0
+			fi
+		fi
+
+	echo $position
+}
+
 #checks if the position reached till 100
 while (( position1 <= $GOAL && position2 <= $GOAL ))
 do
@@ -21,46 +48,14 @@ do
 	#for checking the options like no play, snake or ladder
 	if (( chance == 0 ))
 	then
-		#no play
-		if [[ $option -eq 1 ]]
-		then
-			position1=$position1
-		#ladder
-		elif [[ $option -eq 2 ]]
-		then
-			position1=$(( $position1+$rollDice ))
-		#snake
-		elif [[ $option -eq 3 ]]
-		then
-			position1=$(( $position1-$rollDice ))
-			if [[ $position1 -lt 0 ]]
-			then
-				position1=0
-			fi
+		position1="$( playerPositionChange $option $rollDice $position1 )"
 		count=$(( $count+1 ))
 		chance=1
-		fi
 	elif (( chance == 1 ))
 	then
-		#no play
-		if [[ $option -eq 1 ]]
-		then
-			position2=$position2
-		#ladder
-		elif [[ $option -eq 2 ]]
-		then
-			position2=$(( $position2+$rollDice ))
-		#snake
-		elif [[ $option -eq 3 ]]
-		then
-			position2=$(( $position2-$rollDice ))
-			if [[ $position2 -lt 0 ]]
-			then
-				position2=0
-			fi
+		position2="$( playerPositionChange $option $rollDice $position2)"
 		count=$(( $count+1 ))
 		chance=0
-		fi
 	fi
 done
 
@@ -71,3 +66,5 @@ elif [[ $position2 -eq $GOAL ]]
 then
 	echo "Player 2 has won the game"
 fi
+
+
